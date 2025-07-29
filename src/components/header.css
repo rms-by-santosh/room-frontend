@@ -1,0 +1,143 @@
+/* Header container */
+.header-container {
+  background: linear-gradient(135deg, #1a2a6c, #2a4365);
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* App title */
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  margin: 0;
+  background: linear-gradient(to right, #ffffff, #d1e8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+
+/* Logout button */
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e53e3e;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 40px;
+}
+
+.logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.logout-button:hover::before {
+  left: 100%;
+}
+
+.logout-button:hover {
+  background: #c53030;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.logout-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Logout icon */
+.logout-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.logout-button:hover .logout-icon {
+  transform: rotate(-15deg);
+}
+
+/* Username text */
+.username {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.9rem 1.2rem;
+  }
+  
+  .app-title {
+    font-size: 1.15rem;
+  }
+  
+  .logout-button {
+    padding: 0.45rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.8rem;
+    gap: 10px;
+  }
+  
+  .app-title {
+    text-align: center;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .logout-button {
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .username {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-title {
+    font-size: 1.05rem;
+  }
+  
+  .logout-button {
+    font-size: 0.9rem;
+  }
+}
