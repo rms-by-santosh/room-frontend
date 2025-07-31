@@ -27,35 +27,52 @@ function Approval() {
     }
   };
 
+const notifyUser = async (id) => {
+  try {
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/notify/${id}`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  } catch (err) {
+    console.error("❌ Email notify failed:", err.message);
+  }
+};
+
   const handleApprove = async (id) => {
-    try {
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/requests/approve/${id}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMsg("Request approved and added to current sheet.");
-      fetchRequests();
-      setTimeout(() => setMsg(""), 2000);
-    } catch {
-      setMsg("Approval failed.");
-    }
-  };
+  try {
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/requests/approve/${id}`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    await notifyUser(id); // ✅ send email after approval
+
+    setMsg("Request approved and added to current sheet.");
+    fetchRequests();
+    setTimeout(() => setMsg(""), 2000);
+  } catch {
+    setMsg("Approval failed.");
+  }
+};
+
 
   const handleReject = async (id) => {
-    try {
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/requests/reject/${id}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMsg("Request rejected.");
-      fetchRequests();
-      setTimeout(() => setMsg(""), 2000);
-    } catch {
-      setMsg("Rejection failed.");
-    }
-  };
+  try {
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/requests/reject/${id}`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setMsg("Request rejected.");
+    fetchRequests();
+    setTimeout(() => setMsg(""), 2000);
+  } catch {
+    setMsg("Rejection failed.");
+  }
+};
+
 
   return (
     <div className="approval-container">
